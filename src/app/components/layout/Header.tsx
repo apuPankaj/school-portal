@@ -8,12 +8,33 @@ import { SearchBar } from '../widgets/SearchBar';
 
 import { navLinks } from '../../data/mockData';
 
+import { toast } from 'sonner';
+
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    setUserRole(localStorage.getItem('userRole'));
+    
+    const handleStorageChange = () => {
+      setUserRole(localStorage.getItem('userRole'));
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('studentId');
+    localStorage.removeItem('userContact');
+    setUserRole(null);
+    toast.success('Logged out successfully!');
+    window.location.href = import.meta.env.BASE_URL;
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white dark:bg-slate-900 shadow-md transition-colors duration-300">
@@ -78,18 +99,29 @@ export function Header() {
 
             <div className="flex items-center space-x-3 ml-2">
               <SearchBar className="hidden xl:block w-56" />
-              <Link
-                to="/parent-dashboard"
-                className="bg-blue-100 hover:bg-blue-200 text-blue-900 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-amber-400 px-3 py-2 rounded-md font-semibold text-sm transition-colors shadow-sm"
-              >
-                Dashboard
-              </Link>
-              <Link
-                to="/portal-login"
-                className="bg-amber-500 hover:bg-amber-600 text-[#161616] px-4 py-2 rounded-md font-semibold text-sm transition-colors shadow-sm"
-              >
-                Login
-              </Link>
+              {userRole && (
+                <Link
+                  to={userRole === 'student' ? '/student-dashboard' : '/parent-dashboard'}
+                  className="bg-blue-100 hover:bg-blue-200 text-blue-900 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-amber-400 px-3 py-2 rounded-md font-semibold text-sm transition-colors shadow-sm"
+                >
+                  Dashboard
+                </Link>
+              )}
+              {userRole ? (
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-semibold text-sm transition-colors shadow-sm cursor-pointer border border-transparent"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/portal-login"
+                  className="bg-amber-500 hover:bg-amber-600 text-[#161616] px-4 py-2 rounded-md font-semibold text-sm transition-colors shadow-sm"
+                >
+                  Login
+                </Link>
+              )}
             </div>
           </nav>
 
@@ -157,20 +189,34 @@ export function Header() {
             ))}
             
             <div className="px-3 py-4 mt-2 space-y-3 border-t border-gray-100 dark:border-slate-800">
-              <Link
-                to="/parent-dashboard"
-                className="w-full flex justify-center bg-blue-100 hover:bg-blue-200 text-blue-900 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-amber-400 px-5 py-3 rounded-md font-semibold text-sm transition-colors shadow-sm"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Dashboard
-              </Link>
-              <Link
-                to="/portal-login"
-                className="w-full flex justify-center bg-amber-500 hover:bg-amber-600 text-[#161616] px-5 py-3 rounded-md font-semibold text-sm transition-colors shadow-sm"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Portal Login
-              </Link>
+              {userRole && (
+                <Link
+                  to={userRole === 'student' ? '/student-dashboard' : '/parent-dashboard'}
+                  className="w-full flex justify-center bg-blue-100 hover:bg-blue-200 text-blue-900 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-amber-400 px-5 py-3 rounded-md font-semibold text-sm transition-colors shadow-sm"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Dashboard
+                </Link>
+              )}
+              {userRole ? (
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    handleLogout();
+                  }}
+                  className="w-full flex justify-center bg-red-600 hover:bg-red-700 text-white px-5 py-3 rounded-md font-semibold text-sm transition-colors shadow-sm cursor-pointer border border-transparent"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/portal-login"
+                  className="w-full flex justify-center bg-amber-500 hover:bg-amber-600 text-[#161616] px-5 py-3 rounded-md font-semibold text-sm transition-colors shadow-sm"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Portal Login
+                </Link>
+              )}
             </div>
           </div>
         </div>

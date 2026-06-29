@@ -107,12 +107,9 @@ export function Chatbot() {
 
       {/* Floating Button */}
       <div className="relative mt-4">
-        {!isOpen && (
-          <span className="absolute -inset-2 rounded-full border-[3px] border-amber-500/50 dark:border-amber-400/50 animate-ping z-0"></span>
-        )}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`relative z-10 w-16 h-16 bg-blue-900 hover:bg-blue-800 dark:bg-amber-500 dark:hover:bg-amber-400 text-white dark:text-[#161616] rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 focus:outline-none ${!isOpen ? 'animate-bounce hover:animate-none' : 'hover:scale-110'}`}
+          className="relative z-10 w-16 h-16 bg-blue-900 hover:bg-blue-800 dark:bg-amber-500 dark:hover:bg-amber-400 text-white dark:text-[#161616] rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 focus:outline-none hover:scale-110 active:scale-95"
         >
           {isOpen ? <X size={32} /> : <MessageSquare size={32} />}
         </button>

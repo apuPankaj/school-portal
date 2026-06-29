@@ -1,7 +1,30 @@
-import React from 'react';
-import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import React, { useState } from 'react';
+import { MapPin, Phone, Mail, Send } from 'lucide-react';
+import { toast } from 'sonner';
 
 export function Contact() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
+      toast.error('Incomplete form', { description: 'Please fill in all contact message fields.' });
+      return;
+    }
+
+    toast.success('Message Sent!', {
+      description: `Thank you, ${name}. Your inquiry about "${subject}" has been successfully forwarded to our administration office.`
+    });
+
+    setName('');
+    setEmail('');
+    setSubject('');
+    setMessage('');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950 transition-colors py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-12">
@@ -73,12 +96,14 @@ export function Contact() {
           <div className="lg:col-span-2">
             <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 h-full">
               <h3 className="text-2xl font-bold text-blue-900 dark:text-white mb-6">Send us a Message</h3>
-              <form className="space-y-6" onSubmit={e => e.preventDefault()}>
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Your Name</label>
                     <input 
                       type="text" 
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-700 bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-colors"
                       placeholder="John Doe"
                     />
@@ -87,6 +112,8 @@ export function Contact() {
                     <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Your Email</label>
                     <input 
                       type="email" 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-700 bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-colors"
                       placeholder="john@example.com"
                     />
@@ -96,6 +123,8 @@ export function Contact() {
                   <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Subject</label>
                   <input 
                     type="text" 
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-700 bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-colors"
                     placeholder="Admission Enquiry"
                   />
@@ -104,11 +133,13 @@ export function Contact() {
                   <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Message</label>
                   <textarea 
                     rows={5}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-700 bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-colors resize-none"
                     placeholder="How can we help you?"
                   ></textarea>
                 </div>
-                <button className="w-full md:w-auto px-8 py-3 bg-amber-500 hover:bg-amber-600 text-[#161616] font-bold rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2">
+                <button type="submit" className="w-full md:w-auto px-8 py-3 bg-amber-500 hover:bg-amber-600 text-[#161616] font-bold rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2 cursor-pointer">
                   Send Message <Send className="w-4 h-4" />
                 </button>
               </form>

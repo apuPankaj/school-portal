@@ -4,6 +4,7 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { Outlet } from 'react-router';
 import { Chatbot } from '../widgets/Chatbot';
+import { Toaster } from 'sonner';
 
 export function Root() {
   return (
@@ -15,6 +16,7 @@ export function Root() {
         </main>
         <Footer />
         <Chatbot />
+        <Toaster richColors position="top-right" />
       </div>
     </ThemeProvider>
   );

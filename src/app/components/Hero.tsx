@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 import imgUpscaled1 from '../../imports/Hero_upscaled_1.jpg';
@@ -84,9 +85,12 @@ export function Hero() {
         <p className="text-lg md:text-xl text-gray-100 mb-10 max-w-2xl drop-shadow">
           Empowering young minds with quality education, values, and an environment to excel in every sphere of life.
         </p>
-        <button className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-transform transform hover:scale-105 shadow-lg">
+        <Link 
+          to="/admission#apply" 
+          className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-transform transform hover:scale-105 shadow-lg inline-block text-center"
+        >
           Admissions Open - Apply Now
-        </button>
+        </Link>
       </div>
     </div>
   );

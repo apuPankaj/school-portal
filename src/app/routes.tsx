@@ -6,7 +6,9 @@ import { ParentDashboard } from "./pages/ParentDashboard";
 import { StudentDashboard } from "./pages/StudentDashboard";
 import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
+import { Admission } from "./pages/Admission";
 import { GenericPage } from "./pages/GenericPage";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -15,11 +17,20 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: "portal-login", Component: PortalLogin },
-      { path: "parent-dashboard", Component: ParentDashboard },
-      { path: "student-dashboard", Component: StudentDashboard },
+      { 
+        path: "parent-dashboard", 
+        element: <ProtectedRoute allowedRole="parent"><ParentDashboard /></ProtectedRoute> 
+      },
+      { 
+        path: "student-dashboard", 
+        element: <ProtectedRoute allowedRole="student"><StudentDashboard /></ProtectedRoute> 
+      },
       { path: "about", Component: About },
       { path: "contact", Component: Contact },
+      { path: "admission", Component: Admission },
       { path: "*", Component: GenericPage },
     ],
   },
-]);
+], {
+  basename: import.meta.env.BASE_URL,
+});

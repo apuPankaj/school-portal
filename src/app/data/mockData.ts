@@ -24,6 +24,15 @@ export const navLinks: NavLink[] = [
     ]
   },
   { 
+    name: 'Admission', 
+    subLinks: [
+      { name: 'Admission Guidelines', href: '/admission#guidelines' },
+      { name: 'Online Application Form', href: '/admission#apply' },
+      { name: 'Fee Structure', href: '/admission#fees' },
+      { name: 'Track Application', href: '/admission#track' }
+    ]
+  },
+  { 
     name: 'Beyond Academic', 
     subLinks: [
       { name: 'Summer Camp', href: '/summer-camp' },

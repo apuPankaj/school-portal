@@ -1,5 +1,6 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import { MapPin, Phone, Mail, Facebook, Linkedin, Instagram, Youtube } from 'lucide-react';
+import { Link } from 'react-router';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import logo from '../../../imports/mps_Logo.png';
 
@@ -22,16 +23,36 @@ export function Footer() {
               Modern Public School Balasore is dedicated to delivering excellence in education, focusing on holistic development and character building for over two decades.
             </p>
             <div className="flex space-x-4">
-              <a href="https://facebook.com" className="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors">
+              <a 
+                href="https://www.facebook.com/mpsbalasoreofficial/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors"
+              >
                 <Facebook size={20} />
               </a>
-              <a href="https://twitter.com" className="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors">
-                <Twitter size={20} />
+              <a 
+                href="https://www.linkedin.com/school/mps-balasore/posts/?feedView=all" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors"
+              >
+                <Linkedin size={20} />
               </a>
-              <a href="https://instagram.com" className="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors">
+              <a 
+                href="https://www.instagram.com/mpsbalasore_official/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors"
+              >
                 <Instagram size={20} />
               </a>
-              <a href="https://youtube.com" className="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors">
+              <a 
+                href="https://www.youtube.com/@mpsbalasoreofficial" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-10 h-10 rounded-full bg-blue-900/50 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors"
+              >
                 <Youtube size={20} />
               </a>
             </div>
@@ -41,12 +62,23 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-bold text-white mb-6 uppercase tracking-wider">Quick Links</h3>
             <ul className="space-y-3">
-              {['About Us', 'Academics', 'Admissions', 'Facilities', 'Gallery', 'Career', 'Contact Us'].map((link) => (
-                <li key={link}>
-                  <button className="text-gray-400 hover:text-amber-400 flex items-center transition-colors">
+              {[
+                { label: 'About Us', path: '/about' },
+                { label: 'Academics', path: '/academics' },
+                { label: 'Admissions', path: '/admission' },
+                { label: 'Facilities', path: '/facilities' },
+                { label: 'Gallery', path: '/gallery' },
+                { label: 'Career', path: '/career' },
+                { label: 'Contact Us', path: '/contact' }
+              ].map((link) => (
+                <li key={link.label}>
+                  <Link 
+                    to={link.path} 
+                    className="text-gray-400 hover:text-amber-400 flex items-center transition-colors text-sm"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mr-2"></span>
-                    {link}
-                  </button>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -77,20 +109,53 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Map Placeholder */}
-          <div className="h-full min-h-[200px]">
-            <h3 className="text-lg font-bold text-white mb-6 uppercase tracking-wider">Location Map</h3>
-            <div className="w-full h-48 bg-gray-800 rounded-lg overflow-hidden border border-gray-700 relative flex items-center justify-center group cursor-pointer">
-              <ImageWithFallback 
-                src="https://images.unsplash.com/photo-1619468129361-605ebea04b44?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXAlMjBuYXZpZ2F0aW9uJTIwcGlufGVufDF8fHx8MTc4MjYwNTU2N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Map Placeholder"
-                className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity group-hover:opacity-60 transition-opacity"
-              />
-              <div className="relative z-10 flex flex-col items-center">
-                <MapPin className="text-amber-500 mb-2 transform group-hover:scale-110 transition-transform" size={32} />
-                <span className="text-sm font-medium text-white bg-blue-900/90 px-3 py-1 rounded shadow">View on Google Maps</span>
-              </div>
-            </div>
+          {/* Our Branches */}
+          <div>
+            <h3 className="text-lg font-bold text-white mb-6 uppercase tracking-wider">Our Branches</h3>
+            <ul className="space-y-4 text-sm">
+              <li>
+                <a 
+                  href="https://www.google.com/maps/search/modern+public+school+meghadambru/@21.4701321,86.8805568,6475m/data=!3m2!1e3!4b1?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-amber-400 transition-colors flex items-start gap-2.5 group"
+                >
+                  <MapPin className="text-amber-500 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" size={18} />
+                  <div>
+                    <span className="font-bold block text-white text-sm">MPS Meghadambru</span>
+                    <span className="text-xs text-gray-400 block mt-0.5">Meghadambru, Balasore</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://www.google.com/maps/place/Junior+Modern+Public+School/@21.4971766,86.9226369,809m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3a1cf5a0f984cb2b:0x8455b1c2de0dd70!8m2!3d21.4971716!4d86.9252118!16s%2Fg%2F11c604m6mv?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-amber-400 transition-colors flex items-start gap-2.5 group"
+                >
+                  <MapPin className="text-amber-500 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" size={18} />
+                  <div>
+                    <span className="font-bold block text-white text-sm">Junior Modern Public School</span>
+                    <span className="text-xs text-gray-400 block mt-0.5">Station Road, Balasore</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://www.google.com/maps/place/Modern+Play+School/@21.5065238,86.9329147,3a,75y,90t/data=!3m8!1e2!3m6!1sCIHM0ogKEICAgIC_2tjjVg!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAPNQkAGUGPvA7h9clN_tH25WmZrbbf2az2OzMabu0PgOrc51JUpyZCoogHNctOe5GbfPWKaXUCvS13e0Ad0waJaeA_6MWCyv_cbw-TnAVaNgnyKwBFZCy2wQHVxFd97yCilICoTRyQQA%3Dw114-h86-k-no!7i1280!8i960!4m11!1m2!2m1!1sDarji+pokhari+chowk+Modern+Play+School!3m7!1s0x3a1cf59108fc7e89:0x176b9e82f1e2fec5!8m2!3d21.5064615!4d86.932854!10e5!15sCiZEYXJqaSBwb2toYXJpIGNob3drIE1vZGVybiBQbGF5IFNjaG9vbJIBF2VkdWNhdGlvbmFsX2luc3RpdHV0aW9u4AEA!16s%2Fg%2F11lzkg7nyx?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-amber-400 transition-colors flex items-start gap-2.5 group"
+                >
+                  <MapPin className="text-amber-500 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" size={18} />
+                  <div>
+                    <span className="font-bold block text-white text-sm">Modern Play School</span>
+                    <span className="text-xs text-gray-400 block mt-0.5">Darji Pokhari Chowk, Balasore</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
           </div>
           
         </div>
@@ -98,9 +163,9 @@ export function Footer() {
         <div className="pt-8 border-t border-gray-800 text-center text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center">
           <p>&copy; {new Date().getFullYear()} Modern Public School Balasore. All Rights Reserved.</p>
           <div className="mt-4 md:mt-0 space-x-4">
-            <button className="hover:text-amber-400 transition-colors">Privacy Policy</button>
-            <button className="hover:text-amber-400 transition-colors">Terms of Service</button>
-            <button className="hover:text-amber-400 transition-colors">Sitemap</button>
+            <Link to="/privacy-policy" className="hover:text-amber-400 transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-amber-400 transition-colors">Terms of Service</Link>
+            <Link to="/sitemap" className="hover:text-amber-400 transition-colors">Sitemap</Link>
           </div>
         </div>
       </div>
