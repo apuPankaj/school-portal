@@ -42,7 +42,7 @@ export function PortalLogin() {
       localStorage.setItem('userRole', 'student');
       localStorage.setItem('studentId', data.studentId);
       toast.success('Successfully logged in as Student!');
-      window.location.href = import.meta.env.BASE_URL + 'student-dashboard';
+      window.location.href = import.meta.env.BASE_URL + '#/student-dashboard';
     }, 1000);
   };
 
@@ -88,7 +88,7 @@ export function PortalLogin() {
         localStorage.setItem('userRole', 'parent');
         localStorage.setItem('userContact', parentContact);
         // Redirect to parent dashboard
-        window.location.href = import.meta.env.BASE_URL + 'parent-dashboard';
+        window.location.href = import.meta.env.BASE_URL + '#/parent-dashboard';
       } else {
         setOtpError('Invalid OTP code. Please check and try again.');
         toast.error('Verification failed', {

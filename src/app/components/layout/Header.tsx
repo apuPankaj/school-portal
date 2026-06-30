@@ -33,7 +33,7 @@ export function Header() {
     localStorage.removeItem('userContact');
     setUserRole(null);
     toast.success('Logged out successfully!');
-    window.location.href = import.meta.env.BASE_URL;
+    window.location.href = import.meta.env.BASE_URL + '#/';
   };
 
   return (

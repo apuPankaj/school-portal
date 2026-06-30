@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createHashRouter } from "react-router";
 import { Root } from "./components/layout/Root";
 import { Home } from "./pages/Home";
 import { PortalLogin } from "./pages/PortalLogin";
@@ -10,7 +10,7 @@ import { Admission } from "./pages/Admission";
 import { GenericPage } from "./pages/GenericPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: "/",
     Component: Root,
