@@ -31,6 +31,4 @@ export const router = createHashRouter([
       { path: "*", Component: GenericPage },
     ],
   },
-], {
-  basename: import.meta.env.BASE_URL,
-});
+]);
